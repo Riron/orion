@@ -27,8 +27,9 @@ github = 'Riron'
 rss = true
 
 # home page profile
-avatar = 'GRAVATAR_EMAIL'
+avatar = 'https://drive.google.com/uc?id=1Bm8tru408XDR0_aoURuZccdL_KU-wyY4'
 name = 'Orion Charlier'
 bio = 'Développeur Full Stack Freelance'
+description = 'Orion Charlier, Développeur Full Stack Freelance'
 
 disableHLJS = true
