@@ -1,0 +1,42 @@
+baseURL = 'http://riron.github.io/orion'
+languageCode = 'fr'
+title = 'Orion Charlier'
+theme = 'github.com/nodejh/hugo-theme-mini'
+
+defaultContentLanguage = 'fr'
+
+hasCJKLanguage = true
+paginate = 3
+
+[permalinks]
+posts = "/posts/:title/"
+
+[markup.highlight]
+guessSyntax = true
+style = "emacs"
+
+[markup.tableOfContents]
+endLevel = 3
+ordered = false
+startLevel = 2
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[social]
+github = "https://github.com/Riron"
+twitter = "https://twitter.com/OrionCharlier"
+stackoverflow = "https://stackoverflow.com/users/2703657/riron"
+
+[params]
+author = "Orion Charlier"
+bio = "Développeur Full Stack Freelance"
+description = "Salut test"
+enableRSS = true
+enableComments = false
+enableGoogleAnalytics = false
+showToc = true
+showPowerBy = true
+math = false
+hiddenPostSummaryInHomePage = false
+copyright = ""
