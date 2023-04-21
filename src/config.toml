@@ -1,4 +1,4 @@
-baseURL = 'http://riron.github.io/orion'
+baseURL = 'http://riron.github.io/orion/'
 languageCode = 'fr'
 title = 'Orion Charlier'
 theme = 'github.com/nodejh/hugo-theme-mini'

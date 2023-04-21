@@ -3,7 +3,7 @@ title: "Ecrivons notre propre RxJS"
 date: 2023-04-21
 summary: Pour bien comprendre une librairie, quoi de mieux que de la réécrire soi-même ? Démystifions RxJS en écrivant notre propre version !
 keywords: rxjs, javascript, reactive, build-your-own
-draft: true
+draft: false
 ---
 
 Quand on souhaite comprendre le fonctionnement d'une librairie, le meilleur moyen est souvent d'essayer de la réécrire soi-même. C'est ce que je vous propose de faire aujourd'hui avec moi pour RxJS.

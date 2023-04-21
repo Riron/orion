@@ -1,7 +1,6 @@
 +++
 title = "A propos de moi"
 date = "2023-04-21"
-aliases = ["a-propos", "orion-charlier", "contact", "freelance"]
 author = "Orion Charlier"
 +++
 
