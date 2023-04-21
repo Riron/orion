@@ -1,6 +1,6 @@
 services:
   hugo: 
-      image: klakegg/hugo:ext-alpine
+      image: klakegg/hugo:alpine
       command: server -D
       volumes: 
         - "./src:/src" 

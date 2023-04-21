@@ -1,5 +1,7 @@
 +++
-title = "A propos de moi"
+menu = "main"
+title = "A propos"
+description = "Développeur Full Stack Freelance"
 date = "2023-04-21"
 author = "Orion Charlier"
 +++
