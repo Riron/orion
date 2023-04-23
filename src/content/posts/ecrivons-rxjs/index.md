@@ -43,7 +43,7 @@ Comme un exemple vaut mille mots, terminons cet introduction par un exemple d'im
 > Je ne suis en aucun cas un _expert RxJS_ et cet article n'a pas vocation à reproduire le fonctionnement exact de la librairie. L'idée est simplement de démistifier certains concepts.
 > Si certains points vous semblent confus ou erronnés, n'hésitez pas à venir en discuter dans les commentaires !
 
-## De callback à Observer
+## Callback ou Observer ?
 
 Ouvrons la documentation RxJS et regardons le premier snippet de code que l'on peut y trouver:
 
@@ -53,41 +53,53 @@ import { fromEvent } from "rxjs";
 fromEvent(document, "click").subscribe(() => console.log("Clicked!"));
 ```
 
-À première vue, cela peut sembler compliqué pour pas grand-chose. Rappelons qu'un JS plus classique ressemblerait à ça:
+Partons de son équivalent "Vanilla", et essayons de comprendre comment on en arrive là.
 
 ```js
-document.addEventListener("click", () => console.log("Clicked"));
+const callback = () => console.log("Clicked")
+document.addEventListener("click", callback);
 ```
 
-On a un élément du DOM, `document`, on y attache un event handler au clic, et à chaque clic sur le document notre callback est appelé.
-Avec RxJS, on change notre manière de voir les choses. On passe d'une vision _callback_ à une vision _d'Observer_.
+On a un élément du DOM, `document`, auquel on attache un event handler au clic. A chaque clic sur le document notre callback est appelé.
+Puisque notre callback réagit à l'évènement clic, on pourrait dire que notre callback *observe* cet évènement. Renommons notre fonction pour faire émerger ce concept.
 
-RxJS c'est ça. C'est changer de paradigme, quitter les callbacks et considérer tout comme des collections. On prend notre gestionnaire d'événements qui émettait ponctuellement des valeurs indépendantes et on le transforme en une collection manipulable. Cette colletion grandit avec le temps. Grâce à cette vision de collection, on peut traiter une série d'évènements comme on traiterait un tableau avec lodash et lui appliquer tout un tas d'opérations comme on le verra plus tard.
+```js
+const observer = () => console.log("Clicked")
+document.addEventListener("click", observer);
+```
 
-D'ailleurs, les tableaux peuvent eux aussi être considérés comme des collections. Transformons un tableau classique en Observable.
+Tout d'un coup, sans s'en rendre compte, on a déjà fait la moitié du chemin vers la compréhension de RxJS.
+L'idée est simplement de changer notre manière de voir les choses. De passer d'une vision _callback_ à une vision _Observer_.
+Avec RxJS, on change de paradigme, tout est collection que l'on peut oberver. Dit différemment, un Observable émet des valeurs au cours du temps et je peux être informé de ces emissions.
+
+Prenons un autre exemple, le parcours d'un tableau.
 
 ```js
 const array = [1, 2, 3, 4, 5];
-array.forEach((value) => console.log(value));
+const observer = (value) => console.log(value)
+array.forEach(observer);
 ```
 
-En RxJS, le code devient
+Même gymnastique d'esprit: j'observe les valeurs du tableau arriver les unes après les autres.
 
+Le code RxJS équivalent donne donne ceci.
 ```js
 const array = [1, 2, 3, 4, 5];
 const observer = (value) => console.log(value);
 from(array).subscribe(observer);
 ```
 
-Le principe est le même. On transforme une API _à callback_ classique en un _Observable_ qui expose une méthode `subscribe()`.
+Alors que nous apporte ce changement ? A quoi bon donner un nom différent à des concepts identiques ?
+3 choses principales.
 
-Ce `subscribe()` c'est le moyen donné par l'Observable pour permettre à un **Observer** de s'abonner au flux de données qu'il va produire. L'Observer a la possibilité de passer une fonction qui est appelée par l'Observable à chaque fois qu'une valeur est émise.
+1. Traiter synchrone et asynchrone de la même manière
 
-Vous noterez au passage que le parcours d'un tableau exécute notre callback de manière synchrone, alors que dans le cas de l'event listener, nos callbacks étaient exécutés de manière asynchrone à chaque clic. Avec les Observables en fait peut importe. On a un flux de données qui est poussé (_Push_) à l'Observer. On traite donc de la même maniètre synchrone et asynchrone. On sait juste que la collection qu'on observe peut avoir des valeurs qui changent au cours du temps.
+Pour le côté synchrone / asynchrone, les deux exemples donnés ci-dessus l'illustrent. Le parcours d'un tableau exécute notre callback de manière synchrone. Un event listener lui au contraire émet des valeurs de manière asynchrone, à chaque clic de l'utilisateur. Avec les Observables on traite ça exactement de la même manière. On sait juste qu'on a un flux de données qui est poussé (_Push_) à l'Observer. La collection qu'on observe peut donc émettre des valeurs au cours du temps ou tout en même temps, ça ne change rien.
 
-D'ailleurs, on n'a pas toujours une valeur avec les callbacks.
+2. Traiter tout type de callback uniformément
 
-Prenons les promesses. Elles supportent le succès ou l'erreur.
+On a parlé d'API à callbacks "simples", qui émettent toujours une valeur. Mais on bien d'autres types de callbacks en JavasScript.
+Prenons les promesses. Elles supportent un callback au succès et un à l'erreur.
 
 ```js
 fetch(URL).then(onFulfilled, onRejected);
@@ -96,7 +108,7 @@ fetch(URL).then(onFulfilled, onRejected);
 fetch(URL).then(onFulfilled).catch(onRejected);
 ```
 
-Ou encore les streams qui ont également la notion de "fin".
+On a aussi les streams qui ajoutent une notion de "fin" d'émission.
 
 ```js
 const readerStream = fs.createReadStream("file.txt");
@@ -105,7 +117,10 @@ readerStream.on("error", cbOnError);
 readerStream.on("end", cbOnComplete);
 ```
 
-Comme on a compris que l'on pouvait convertir toute API à callback en Observable, notre méthode `.subscribe()` peut, au lieu d'accepter un simple callback en paramètre, prendre un objet qui en spécifie 3.
+Bien que tous ces types de callbacks soient différents, RxJS les "wrap" pour les manipuler et les exposer d'une manière identique. C'est ce que nous verrons dans la deuxième partie quand nous définirons le concept d'Observable. Mais grossièrement, RxJS nous expose une fonction `from` qui va accepter n'importe quelle méthode à callback JS et nous retourner un Observable.
+
+En attendant complétons tout de même notre vision de l'observer.
+Puisque l'on veut convertir toute API à callback en Observable, il nous faut, au lieu de définir l'Observer comme un simple callback, prendre un objet qui en spécifie 3.
 
 ```js
 const observer = {
@@ -113,12 +128,18 @@ const observer = {
   error: (err) => console.error("Something bad happened"),
   complete: () => console.info("Stream ended"),
 };
+
 from(myStream).subscribe(observer);
 ```
 
-Sans s'en rendre compte, on vient de terminer l'implémentation d'un Observer. C'est simplement un nom que l'on donne à une ou plusieurs fonctions qui sont appelées par notre Observable lorsqu'une nouvelle valeur est émise.
+Avec ce simple objet on gère tous les cas possibles. On a l'Observer dans sa forme la plus complète.
+Mais le callback simple est tout de même utilisable dans RxJS lorsque l'on n'a pas à gérer l'erreur ou la complétion. Pour cette raison, c'est la forme simplifiée que nous utiliserons dans la suite de cet article, afin ne pas surcharger le code.
 
-Pour rester concis dans cet article, nous utiliserons la version simplifiée des Observer: `const observer = (data) => {}`. Nous ne travaillerons qu'avec des APIs à callback unique. Cela simplifie légèrement le code, mais les principes d'implémentation restent les mêmes.
+3. Manipuler la donnée facilement
+
+Une API unifiée par dessus les callbacks nous permet d'avoir la donnée toujours sous la même forme. Et cette forme, c'est la collection.
+Les collections, il faut les voir un peu comme des tableaux auxquels on ajouterait une notion de temps. Mais les tableaux on a l'habitude de les manipuler. Avec Lodash par exemple on a tout un tas d'opérateurs qu'on utilise bien souvent.
+Eh bien, une collection c'est pareil. Elle sera manipulable exactement de la même manière. On pourra donc écrire du code réctif, concis et clair en enchainant l'application d'opérateurs sur un flux de données comme on a l'habitude de faire un `array.map().filter()`.
 
 ## Dessine moi un Observable
 

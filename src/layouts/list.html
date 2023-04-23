@@ -12,6 +12,7 @@
 {{ end }}
 
 <!-- Articles -->
+<!-- EDIT: hide content with the unlisted param -->
 {{ $paginator := .Paginate $pages }} {{ range $index, $page := (where $paginator.Pages ".Params.unlisted" "!=" "true")
 }}<!---->
 
