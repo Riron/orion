@@ -32,6 +32,48 @@ On résume dans la langue de Molière:
 
 Comme un exemple vaut mille mots, terminons cet introduction par un exemple d'implémentation d'un "type ahead", en RxJS et en "vanilla JS". Prêtez bien attention à la différence d'approche, impérative en Vanilla et déclarative en RxJS, entre ces deux codes qui font (presque, cf commentaires) la même chose.
 
+```js
+// ---------
+// Code RxJs
+// ---------
+fromEvent(input, "keyup")
+  .pipe(
+    debounceTime(200),
+    map((e) => e.target.value),
+    distinctUntilChanged(),
+    switchMap(fakeContinentsRequest),
+    tap((c) => {
+      document.getElementById("output-rxjs").innerText = c.join("\n");
+    })
+  )
+  .subscribe();
+
+// ------------
+// Code Vanilla
+// ------------
+const input = document.getElementById("typeahead-vanilla");
+
+const debounceOnKeyUp = debounce(onKeyUp, 200);
+input.addEventListener("keyup", debounceOnKeyUp);
+
+let latestValue;
+function onKeyUp(e) {
+  // Equivalent à map()
+  const value = e.target.value;
+
+  // Equivalent à distinctUntilChanged()
+  if (value === latestValue) {
+    return;
+  }
+  latestValue = value;
+
+  // /!\ Ne gère pas le "cancel" de promesses à chaque keyUp, et peut causer des bugs si un appel "viel" appel réseau se résout après un plus récent
+  getContinents(value).then((continents) => {
+    document.getElementById("output-vanilla").innerText = continents.join("\n");
+  });
+}
+```
+
 <iframe src="https://codesandbox.io/embed/vigilant-hooks-k3c8cl?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frxjs.js&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="vigilant-hooks-k3c8cl"
