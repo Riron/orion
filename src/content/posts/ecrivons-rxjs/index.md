@@ -53,6 +53,7 @@ fromEvent(input, "keyup")
 // ------------
 const input = document.getElementById("typeahead-vanilla");
 
+// Equivalent à debounceTime()
 const debounceOnKeyUp = debounce(onKeyUp, 200);
 input.addEventListener("keyup", debounceOnKeyUp);
 
@@ -67,8 +68,10 @@ function onKeyUp(e) {
   }
   latestValue = value;
 
-  // /!\ Ne gère pas le "cancel" de promesses à chaque keyUp, et peut causer des bugs si un appel "viel" appel réseau se résout après un plus récent
+  // /!\ Plus ou moins équivalent au switchMap()
+  // Ne gère pas le "cancel" de promesses à chaque keyUp, et peut causer des bugs si un appel "viel" appel réseau se résout après un plus récent
   getContinents(value).then((continents) => {
+    // Equivalent à tap()
     document.getElementById("output-vanilla").innerText = continents.join("\n");
   });
 }
