@@ -299,10 +299,10 @@ function map(project) {
 }
 ```
 
-- Nous acceptons une fonction de projection `project` pour transformer la donnée ==(1)==.
-- Nous retournons une closure ==(2)==. Cette closure capture la fonction de projection pour pouvoir l'appliquer.
-- Notre closure prend un Observable de départ en paramètre ==(3)==.
-- Notre closure retourne un nouvel Observable ==(4)==.
+- Nous acceptons une fonction de projection `project` pour transformer la donnée <mark>(1)</mark>.
+- Nous retournons une closure <mark>(2)</mark>. Cette closure capture la fonction de projection pour pouvoir l'appliquer.
+- Notre closure prend un Observable de départ en paramètre <mark>(3)</mark>.
+- Notre closure retourne un nouvel Observable <mark>(4)</mark>.
 - Dans la définition du nouvel Observable, on `subscribe` à l'Observable initial pour récupérer sa valeur. On applique la projection sur cette valeur. Puis on renvoie un nouvel Observable, défini avec la valeur projetée que nous venons de calculer.
 
 Un Observer en sortie a désormais accès à la valeur projetée.
