@@ -1,7 +1,7 @@
 ---
 title: "Ecrivons notre propre RxJS"
 date: 2023-04-21
-summary: Pour bien comprendre une librairie, quoi de mieux que de la réécrire soi-même ? Démystifions RxJS en écrivant notre propre version !
+summary: Démystifions RxJS en écrivant notre propre version !
 keywords: rxjs, javascript, reactive, build-your-own
 _build:
   list: never
@@ -84,10 +84,12 @@ function onKeyUp(e) {
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
+<br />
 
-> **DISCLAIMER**
-> Je ne suis en aucun cas un _expert RxJS_ et cet article n'a pas vocation à reproduire le fonctionnement exact de la librairie. L'idée est simplement de démistifier certains concepts.
-> Si certains points vous semblent confus ou erronnés, n'hésitez pas à venir en discuter dans les commentaires !
+{{< alert "triangle-exclamation" >}}
+Je ne suis en aucun cas un _expert RxJS_ et cet article n'a pas vocation à reproduire le fonctionnement exact de la librairie. L'idée est simplement de démistifier certains concepts.
+Si certains points vous semblent confus ou erronnés, n'hésitez pas à venir en discuter dans les commentaires !
+{{< /alert >}}
 
 ## Callback ou Observer ?
 
@@ -212,7 +214,10 @@ Notons plusieurs choses:
 - Il faut retourner un Observable, c'est le postulat de base
 - Nous donnons au constructeur de cet Observable sa _définition_, le moyen d'émettre des valeurs au cours du temps. A chaque évènement émis, nous appelons notre Observer avec la nouvelle valeur.
 
-> Notez bien que la définition de l'Observable est **une closure** ! `target.addEventListener` n'est donc pas immédiatement invoqué. C'est l'Observer qui, en souscrivant à l'Observable, déclenchera l'event emitter. C'est pourquoi on dit des Observables qu'ils sont **lazy**.
+{{< alert "triangle-exclamation" >}}
+Notez bien que la définition de l'Observable est **une closure** !
+`target.addEventListener` n'est donc pas immédiatement invoqué. C'est l'Observer qui, en souscrivant à l'Observable, déclenchera l'event emitter. C'est pourquoi on dit des Observables qu'ils sont **lazy**.
+{{< /alert >}}
 
 Implémentons maintenant notre classe `Observable`. Nous avons vu qu'il faut un constructeur pour définir le comportement de notre Observable, et que la souscription au flux de données se fait via une méthode `subscribe`.
 

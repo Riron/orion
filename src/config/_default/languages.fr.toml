@@ -1,0 +1,24 @@
+languageCode = "fr"
+languageName = "Français"
+displayName = "FR"
+isoCode = "fr"
+weight = 1
+rtl = false
+
+title = "Orion Charlier"
+description = "Site personnel de Cosme Charlier"
+
+dateFormat = "2 January 2006"
+
+[author]
+  name = "Orion Charlier"
+  image = "img/logo.jpg"
+  headline = "Développeur Full Stack Freelance"
+  bio = ""
+  links = [
+      { email = "mailto:ocharlier@coretech.fr" },
+      { github = "https://github.com/riron" },
+      { linkedin = "https://www.linkedin.com/in/orion-charlier-4022a646" },
+      { stack-overflow = "https://stackoverflow.com/users/2703657/riron" },
+      { twitter = "https://twitter.com/OrionCharlier" },
+  ]

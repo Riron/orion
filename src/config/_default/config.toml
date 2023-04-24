@@ -1,0 +1,6 @@
+theme = "congo"
+defaultContentLanguage = "fr"
+
+enableRobotsTXT = true
+paginate = 10
+summaryLength = 0
