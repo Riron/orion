@@ -69,7 +69,8 @@ function onKeyUp(e) {
   latestValue = value;
 
   // /!\ Plus ou moins équivalent au switchMap()
-  // Ne gère pas le "cancel" de promesses à chaque keyUp, et peut causer des bugs si un appel "viel" appel réseau se résout après un plus récent
+  // Ne gère pas le "cancel" de promesses à chaque keyUp.
+  // Peut causer des bugs si l'appel réseau N se résout après l'appel N+1.
   getContinents(value).then((continents) => {
     // Equivalent à tap()
     document.getElementById("output-vanilla").innerText = continents.join("\n");
