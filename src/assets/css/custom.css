@@ -1,5 +1,5 @@
 .max-w-prose, .prose {
-  max-width: 200ch;
+  max-width: 100%;
 }
 
 /* Background */ .bg, .dark .bg { color: #f5a97f; background-color: #24273a; }
@@ -11,8 +11,7 @@
 /* LineTableTD */ .chroma .lntd, .dark .chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
 /* LineTable */ .chroma .lntable, .dark .chroma .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; }
 /* LineHighlight */ .chroma .hl, .dark .chroma .hl { background-color: #ffffcc }
-/* LineNumbersTable */ .chroma .lnt, .dark .chroma .lnt { white-space: pre; user-select: none; margin-right: 0.4em; padding: 0 0.4em 0 0.4em;color: #7a543f }
-/* LineNumbersTable */ .dark .chroma .lnt { color: #d4d4d8 }
+/* LineNumbersTable */ .chroma .lnt, .dark .chroma .lnt { white-space: pre; user-select: none; margin-right: 0.4em; padding: 0 0.4em 0 0.4em;color: #d4d4d8 }
 /* LineNumbers */ .chroma .ln, .dark .chroma .ln { white-space: pre; user-select: none; margin-right: 0.4em; padding: 0 0.4em 0 0.4em;color: #7a543f }
 /* Line */ .chroma .line, .dark .chroma .line { display: flex; }
 /* Keyword */ .chroma .k, .dark .chroma .k { color: #c6a0f6 }
