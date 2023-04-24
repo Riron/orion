@@ -18,6 +18,7 @@ RxJS est une librairie de **programmation réactive** basée sur les **Observabl
 Les quelques lignes suivantes, tirées de la documentation officielle, résument plusieurs principes importants:
 
 > Observables are lazy Push collections of multiple values. They fill the missing spot in the following table:
+>
 > | |SINGLE |MULTIPLE |
 > |-----|--------|---------|
 > |Pull |Function|Iterator |
@@ -32,7 +33,7 @@ On résume dans la langue de Molière:
 
 Comme un exemple vaut mille mots, terminons cet introduction par un exemple d'implémentation d'un "type ahead", en RxJS et en "vanilla JS". Prêtez bien attention à la différence d'approche, impérative en Vanilla et déclarative en RxJS, entre ces deux codes qui font (presque, cf commentaires) la même chose.
 
-```js
+```javascript
 // ---------
 // Code RxJs
 // ---------
@@ -95,7 +96,7 @@ Si certains points vous semblent confus ou erronnés, n'hésitez pas à venir en
 
 Ouvrons la documentation RxJS et regardons le premier snippet de code que l'on peut y trouver:
 
-```js
+```javascript
 import { fromEvent } from "rxjs";
 
 fromEvent(document, "click").subscribe(() => console.log("Clicked!"));
@@ -103,7 +104,7 @@ fromEvent(document, "click").subscribe(() => console.log("Clicked!"));
 
 Partons de son équivalent "Vanilla", et essayons de comprendre comment on en arrive là.
 
-```js
+```javascript
 const callback = () => console.log("Clicked")
 document.addEventListener("click", callback);
 ```
@@ -111,7 +112,7 @@ document.addEventListener("click", callback);
 On a un élément du DOM, `document`, auquel on attache un event handler au clic. A chaque clic sur le document notre callback est appelé.
 Puisque notre callback réagit à l'évènement clic, on pourrait dire que notre callback *observe* cet évènement. Renommons notre fonction pour faire émerger ce concept.
 
-```js
+```javascript
 const observer = () => console.log("Clicked")
 document.addEventListener("click", observer);
 ```
@@ -122,7 +123,7 @@ Avec RxJS, on change de paradigme, tout est collection que l'on peut oberver. Di
 
 Prenons un autre exemple, le parcours d'un tableau.
 
-```js
+```javascript
 const array = [1, 2, 3, 4, 5];
 const observer = (value) => console.log(value)
 array.forEach(observer);
@@ -131,7 +132,7 @@ array.forEach(observer);
 Même gymnastique d'esprit: j'observe les valeurs du tableau arriver les unes après les autres.
 
 Le code RxJS équivalent donne donne ceci.
-```js
+```javascript
 const array = [1, 2, 3, 4, 5];
 const observer = (value) => console.log(value);
 from(array).subscribe(observer);
@@ -149,7 +150,7 @@ Pour le côté synchrone / asynchrone, les deux exemples donnés ci-dessus l'ill
 On a parlé d'API à callbacks "simples", qui émettent toujours une valeur. Mais on bien d'autres types de callbacks en JavasScript.
 Prenons les promesses. Elles supportent un callback au succès et un à l'erreur.
 
-```js
+```javascript
 fetch(URL).then(onFulfilled, onRejected);
 
 // qui est équivalent à
@@ -158,7 +159,7 @@ fetch(URL).then(onFulfilled).catch(onRejected);
 
 On a aussi les streams qui ajoutent une notion de "fin" d'émission.
 
-```js
+```javascript
 const readerStream = fs.createReadStream("file.txt");
 readerStream.on("data", cbOnNext);
 readerStream.on("error", cbOnError);
@@ -170,7 +171,7 @@ Bien que tous ces types de callbacks soient différents, RxJS les "wrap" pour le
 En attendant complétons tout de même notre vision de l'observer.
 Puisque l'on veut convertir toute API à callback en Observable, il nous faut, au lieu de définir l'Observer comme un simple callback, prendre un objet qui en spécifie 3.
 
-```js
+```javascript
 const observer = {
   next: (data) => console.log(data),
   error: (err) => console.error("Something bad happened"),
@@ -195,13 +196,13 @@ Bon, maintenant que nous avons compris ce qu'est un Observer, nous avons besoin 
 
 Reprenons notre exemple initial et écrivons le code pas à pas.
 
-```js
+```javascript
 fromEvent(document, "click").subscribe(() => console.log("Clicked!"));
 ```
 
 La première fonction à écrire c'est `fromEvent`. Nous avons besoin d'une fonction qui prend deux paramètres : un élément du DOM auquel attacher notre listener, et le type d'événement que nous souhaitons écouter. Cette fonction doit nous retourner un Observable.
 
-```js
+```javascript
 function fromEvent(target, type) {
   return new Observable((observer) => {
     target.addEventListener(type, observer);
@@ -221,7 +222,7 @@ Notez bien que la définition de l'Observable est **une closure** !
 
 Implémentons maintenant notre classe `Observable`. Nous avons vu qu'il faut un constructeur pour définir le comportement de notre Observable, et que la souscription au flux de données se fait via une méthode `subscribe`.
 
-```js
+```javascript
 class Observable {
   constructor(subscribe) {
     this._subscribe = subscribe;
@@ -249,7 +250,7 @@ Testons notre code pour vérifier qu'il fonctionne comme attendu.
 
 Pour vérifier que nous avons bien compris, prenons désormais l'exemple d'un parcours de tableau. L'Observer ne change pas. Nous avons seulement besoin d'une nouvelle méthode pour convertir un tableau en Observable. Avec RxJS, c'est `from` que nous utilisons.
 
-```js
+```javascript
 const array = [1, 2, 3, 4, 5];
 // Mode callback
 array.forEach((value) => console.log(value));
@@ -260,7 +261,7 @@ from(array).subscribe((value) => console.log(value));
 
 Pour l'implémentation de `from` rien de compliqué.
 
-```js
+```javascript
 function from(array) {
   return new Observable((cb) => {
     array.forEach(cb);
@@ -278,7 +279,7 @@ Nous avons beaucoup parlé d'opérateurs et de manipulation de flux, mais à quo
 
 Reprenons un exemple simple:
 
-```js
+```javascript
 fromEvent(document, "click")
   .pipe(
     map((v) => v.clientX),
@@ -292,7 +293,7 @@ Voici nos premiers opérateurs, les biens connus `map` et `filter`. Tout comme o
 On constate qu'ils sont appliqués via une méthode `pipe`, qui accepte une liste d'opérateurs joués successivement sur la collection.
 Implémentons cela.
 
-```js
+```javascript
 class Observable {
   constructor(subscribe) {
     this._subscribe = subscribe;
@@ -310,7 +311,7 @@ class Observable {
 
 La méthode `pipe` prend un paramètre `...args`. Ainsi, `args` est un tableau d'opérateurs sur lequel on itére pour les appliquer un par un. Pour ce faire, on utilise traditionnellement `array.reduce()`. Sa valeur de départ est l'Observable courant. Pour chaque opérateur parcouru, on applique la transformation souhaitée sur la valeur courante. Enfin on renvoie un nouvel Observable qui contient la valeur du précédent après transformation.
 
-```js
+```javascript
 pipe(...args) {
     return args.reduce((prev, op) => op(prev), this)
 }
@@ -318,7 +319,7 @@ pipe(...args) {
 
 Si nous éliminons le `.reduce()`, cela donne:
 
-```js
+```javascript
 pipe(...args) {
     let currentObservable = this;
     for (const operator in args) {
@@ -337,7 +338,7 @@ Charge à nous désormais d'implémenter correctement les opérateurs pour que l
 
 Passons à l'implémentation. Nous l'expliquerons juste après en reprenant chaque numéro de contrainte et en traduisant ou elle se retrouve.
 
-```js
+```javascript
 function map(project) {
   return (startObservable) => {
     return new Observable((cb) => {
@@ -360,7 +361,7 @@ Un Observer en sortie a désormais accès à la valeur projetée.
 
 Et c'est pareil pour `filter`:
 
-```js
+```javascript
 function filter(project) {
   return (startObservable) => {
     return new Observable((cb) => {
