@@ -1,3 +1,7 @@
+.max-w-prose, .prose {
+  max-width: 200ch;
+}
+
 /* Background */ .bg, .dark .bg { color: #f5a97f; background-color: #24273a; }
 /* PreWrapper */ .chroma, .dark .chroma { color: #f5a97f; background-color: #24273a; }
 /* Other */ .chroma .x, .dark .chroma .x {  }
