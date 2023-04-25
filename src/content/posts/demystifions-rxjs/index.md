@@ -1,13 +1,13 @@
 ---
-title: "Ecrivons notre propre RxJS"
+title: "RxJS en moins de 50 lignes de code"
 date: 2023-04-21
-summary: Démystifions RxJS en écrivant notre propre version !
+summary: Démystifions RxJS en écrivant notre propre version
 keywords: rxjs, javascript, reactive, build-your-own
 _build:
   list: never
 ---
 
-Quand on souhaite comprendre le fonctionnement d'une librairie, le meilleur moyen est souvent d'essayer de la réécrire soi-même. C'est ce que je vous propose de faire aujourd'hui avec moi pour RxJS.
+Quand on souhaite comprendre le fonctionnement d'une librairie, le meilleur moyen est souvent d'essayer de la réécrire soi-même. C'est ce que je vous propose de faire aujourd'hui avec RxJS.
 
 ## Définition
 
@@ -89,8 +89,8 @@ function onKeyUp(e) {
 <br />
 
 {{< alert "triangle-exclamation" >}}
-Je ne suis en aucun cas un _expert RxJS_ et cet article n'a pas vocation à reproduire le fonctionnement exact de la librairie. L'idée est simplement de démistifier certains concepts.
-Si certains points vous semblent confus ou erronnés, n'hésitez pas à venir en discuter dans les commentaires !
+Je ne suis en aucun cas un _expert RxJS_ et cet article n'a pas vocation à reproduire le fonctionnement exact de la librairie. L'idée est simplement de démystifier certains concepts.
+Si certains points vous semblent confus ou erronnés, n'hésitez pas à venir en discuter !
 {{< /alert >}}
 
 ## Callback ou Observer ?
@@ -390,5 +390,5 @@ Vérifions que tout fonctionne comme souhaité.
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
 
-On pourrait s'amuser à implémenter encore de nombreux opérateurs, mais vous aurez compris le principe. J'espère que ce "deep dive" dans le fonctionnement de RxJS vous aura permis de démistifier les Observables et de mieux comprendre leur fonctionnement.
+On pourrait s'amuser à implémenter encore de nombreux opérateurs, mais vous aurez compris le principe. J'espère que ce "deep dive" dans le fonctionnement de RxJS vous aura permis de démystifier les Observables et de mieux comprendre leur fonctionnement.
 Pour en savoir plus sur la librairie et consulter le code source rendez-vous sur [leur github](https://github.com/ReactiveX/rxjs) !

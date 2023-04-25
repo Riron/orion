@@ -71,7 +71,7 @@
 /* Comment */ .chroma .c, .dark .chroma .c { color: #5b6078; font-style: italic }
 /* CommentHashbang */ .chroma .ch, .dark .chroma .ch { color: #5b6078; font-style: italic }
 /* CommentMultiline */ .chroma .cm, .dark .chroma .cm { color: #5b6078; font-style: italic }
-/* CommentSingle */ .chroma .c1, .dark .chroma .c1 { color: #5b6078; font-style: italic }
+/* CommentSingle */ .chroma .c1, .dark .chroma .c1 { color: #9ca1bb; font-style: italic }
 /* CommentSpecial */ .chroma .cs, .dark .chroma .cs { color: #5b6078; font-style: italic }
 /* CommentPreproc */ .chroma .cp, .dark .chroma .cp { color: #8aadf4; font-style: italic }
 /* CommentPreprocFile */ .chroma .cpf, .dark .chroma .cpf { color: #8aadf4; font-style: italic }
