@@ -319,7 +319,7 @@ function createProxy(worker, path = []) {
 ```
 
 Testons notre code désormais.
-Si on ne s'occuppe pas encore de l'implémentation côté worker, on a tout de même besoin d'un code minimal pour vérifier que nos appels fonctionnent
+Si on ne s'occuppe pas encore de l'implémentation côté worker, on a tout de même besoin d'un code minimal pour vérifier que nos appels fonctionnent.
 
 **worker.js**
 ```JavaScript
@@ -331,6 +331,7 @@ onmessage = (evt) => {
 }
 ```
 
+<br />
 <iframe src="https://stackblitz.com/edit/web-platform-zog2pw?file=index.html"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="web-platform-zog2pw"
