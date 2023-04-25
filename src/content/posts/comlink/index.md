@@ -332,7 +332,7 @@ onmessage = (evt) => {
 ```
 
 <br />
-<iframe src="https://stackblitz.com/edit/web-platform-zog2pw?file=index.html"
+<iframe src="https://stackblitz.com/edit/web-platform-zog2pw?devToolsHeight=33&embed=1&file=index.html"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="web-platform-zog2pw"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -420,3 +420,5 @@ Et c'est terminé ! Nous avons désormais un code capable de répondre à l'exem
    ></iframe>
 
 ## Conclusion
+
+TODO
