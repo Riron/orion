@@ -87,16 +87,16 @@ onmessage = (e) => {
 }
 ```
 
-On observe que rapidement, même si ce n'est rien d'insurmontable, communiquer par message uniquement est une contrainte importante. Ecrire du code est plus pénible et moins lisible que lorsqu'on code dans un thread unique et que l'on peut facilement appeler des fonctions et lire des variables.
+On observe que rapidement, même si ce n'est rien d'insurmontable, communiquer par message uniquement est une contrainte importante. Ecrire du code est plus pénible et moins lisible que lorsqu'on développe dans un thread unique ou l'on peut facilement appeler des fonctions et lire des variables.
 
 
 ### Comlink
 
-[Comlink](https://github.com/GoogleChromeLabs/comlink) est une librairie JS mise à disposition par l'équipe de Chrome qui vise à simplifier les interactions entre main thread et web worker.
+[Comlink](https://github.com/GoogleChromeLabs/comlink) est une librairie JS écrite par Google qui vise à simplifier les interactions entre main thread et web worker.
 
 > Comlink is a tiny library (1.1kB), that removes the mental barrier of thinking about postMessage and hides the fact that you are working with workers.
 
-L'idée est de masquer entièrement cette API basée sur les messages pour proposer aux développeurs de simuler le fait que les méthodes et variables du worker sont locales. 
+L'idée est de masquer entièrement l'API basée sur les messages pour proposer aux développeurs de développer comme si les méthodes et variables exposées par le worker étaient locales au main thread. 
 
 Prenons un exemple tout de suite pour bien comprendre.
 
@@ -127,9 +127,9 @@ const obj = {
 Comlink.expose(obj);
 ```
 
-Le worker est exposé via une variable `obj`. Sur cette variable, j'accède à la propriété `counter` et je peux appeler la méthode `inc()` comme je l'aurais fait sur le main thread. Avec juste une différence, il faut `await` la réponse. En effet, en sous marin l'appel passe bien par un `postMessage()`, c'est à dire un appel asynchrone. L'utilisation de promesses est donc incontournable.
+Le worker est exposé via une variable `obj`. Sur cette variable, j'accède à la propriété `counter` et je peux appeler la méthode `inc()` comme je l'aurais fait pour une fonction classique. Avec juste une différence, il faut `await` la réponse. En effet, en sous marin l'appel passe bien par un `postMessage()`, c'est à dire un appel asynchrone. L'utilisation de promesses est donc incontournable.
 
-En voyant ça, peut-être que vous vous aussi vous vous posez la question. Mais comment ça fonctionne ?? Regardons ça ensemble.
+En voyant ça, peut-être que vous vous aussi vous vous posez la question "mais comment ça fonctionne ??". Regardons ça ensemble.
 
 ## Implémentons
 
