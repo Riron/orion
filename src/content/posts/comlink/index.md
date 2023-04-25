@@ -7,7 +7,7 @@ _build:
   list: always
 ---
 
-Après avoir réécrit [RxJS]({{< ref "/demystifions-rxjs" >}}) dans un précédent article, je vous propose de réécrire une nouvelle librairie JavaScript. J'ai nommé Comlink.
+Après avoir réécrit [RxJS]({{< ref "/demystifions-rxjs" >}}) dans un précédent article, je vous propose de réécrire une nouvelle librairie JavaScript. J'ai nommé [Comlink](https://github.com/GoogleChromeLabs/comlink).
 
 ## Les web workers
 
