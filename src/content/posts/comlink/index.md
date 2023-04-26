@@ -445,6 +445,6 @@ Et c'est terminé ! Nous venons de développer notre Comlink maison.
 
 ## Conclusion
 
-Alors comme d'habitude, notre implémentation est très incomplète par rapport à Comlink. Nous ne gérons pas les erreurs, nous ne gérons pas les appels à des constructeurs par exemple, ou alors le fait d'assigner des valeurs à des propriétés... Et en plus de ça nous ne gérons que des appels simples à des workers et non pas toute API "postMessage-like" comme le fait Comlink.
+Evidemment, Comlink c'est plus que ça. D'abord par ce que nous sommes loins de gérer tous les cas: erreurs, constructeurs, assignation de valeur à des propriétés... Les cas possibles sont nombreux. L'API de Comlink est également plus large que simplement les méthodes `expose` et `wrap`, ceci pour permettre de gérer des cas plus complexes.
 
-Mais l'intérêt n'est pas là. L'intérêt pour nous est de comprendre ce qui rend possible cette API qui peut paraitre presque magique à première vue, et d'en profiter pour se plonger dans le monde merveilleux des Proxys. C'est intéressant car les cas d'usage pour les Proxy sont assez rares, et c'est inspirant de voir comment certains arrivent à pousser les concepts pour inventer de nouveaux usages.
+Mais le but souhaité est je crois atteint. Nous avons compris les grands principes qui régissaient le fonctionnement de Comlink, et nous avons le savons traduit dans le code en quelques lignes.  Cette découverte nous a permis de rentrer en profondeur dans le fonctionnement des Proxys, et de leur trouver un cas d'usage parfait - ce qui n'est pas si évident !
