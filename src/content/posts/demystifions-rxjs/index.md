@@ -390,5 +390,7 @@ Vérifions que tout fonctionne comme souhaité.
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
 
+## Conclusion
+
 On pourrait s'amuser à implémenter encore de nombreux opérateurs, mais vous aurez compris le principe. J'espère que ce "deep dive" dans le fonctionnement de RxJS vous aura permis de démystifier les Observables et de mieux comprendre leur fonctionnement.
 Pour en savoir plus sur la librairie et consulter le code source rendez-vous sur [leur github](https://github.com/ReactiveX/rxjs) !
