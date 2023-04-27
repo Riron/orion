@@ -3,8 +3,6 @@ title: "RxJS en moins de 50 lignes de code"
 date: 2023-04-21
 summary: Démystifions RxJS en écrivant notre propre version
 keywords: rxjs, javascript, reactive, build-your-own
-_build:
-  list: never
 ---
 
 Quand on souhaite comprendre le fonctionnement d'une librairie, le meilleur moyen est souvent d'essayer de la réécrire soi-même. C'est ce que je vous propose de faire aujourd'hui avec RxJS.

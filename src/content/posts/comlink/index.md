@@ -3,8 +3,6 @@ title: "Enfin des web-workers developer-friendly"
 date: 2023-04-25
 summary: Démystifions Comlink en écrivant notre propre version
 keywords: javascript, web-worker, worker, async build-your-own
-_build:
-  list: never
 ---
 
 Après avoir réécrit [RxJS]({{< ref "/demystifions-rxjs" >}}) dans un précédent article, je vous propose de réécrire une nouvelle librairie JavaScript. J'ai nommé [Comlink](https://github.com/GoogleChromeLabs/comlink).
