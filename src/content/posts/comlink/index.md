@@ -170,9 +170,11 @@ function wrap(worker) {
 Pour intercepter les opérations, notre handler va pouvoir définir différents *pièges* ou *trap*. Ces pièges vont intercepter les appels aux *[Object internal methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy#object_internal_methods)*, les méthods internes à chaque objet, et nous permettre de modifier leur comportement.
 
 Pour bien comprendre comment ça fonctionne, imaginons l'object suivant.
-```JavaScript
+
+{{< highlight JavaScript "lineNos=false" >}}
 const foo = { bar: 1 };
-```
+{{< /highlight >}}
+
 Voyons maintenant les chemins possibles lorsqu'on appelle `foo.bar.func()`.
 Le chemin théorique d'abord qui tombera en erreur puisque `bar` n'a pas de propriété `func()`. Puis le chemin que l'on va pouvoir générer grâce aux proxys ensuite, qui lui va simuler que tout existe comme prévu et pouvoir avoir le comportement que l'on désire.
 
@@ -445,6 +447,6 @@ Et c'est terminé ! Nous venons de développer notre Comlink maison.
 
 ## Conclusion
 
-Evidemment, Comlink c'est plus que ça. D'abord par ce que nous sommes loins de gérer tous les cas: erreurs, constructeurs, assignation de valeur à des propriétés... Les cas possibles sont nombreux. L'API de Comlink est également plus large que simplement les méthodes `expose` et `wrap`, ceci pour permettre de gérer des cas plus complexes.
+Evidemment, Comlink c'est plus que ça. D'abord par ce que nous sommes loins de gérer tous les cas: erreurs, constructeurs, assignation de valeur à des propriétés... Les cas possibles sont nombreux. L'API de Comlink est également plus large que simplement les méthodes `expose` et `wrap`, ceci pour permettre de gérer des cas plus complexes. Pour découvrir tout ça je vous invite à consulter le [code source sur GitHub](https://github.com/GoogleChromeLabs/comlink).
 
 Mais le but souhaité est je crois atteint. Nous avons compris les grands principes qui régissaient le fonctionnement de Comlink, et nous avons le savons traduit dans le code en quelques lignes.  Cette découverte nous a permis de rentrer en profondeur dans le fonctionnement des Proxys, et de leur trouver un cas d'usage parfait - ce qui n'est pas si évident !
