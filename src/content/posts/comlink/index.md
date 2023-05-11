@@ -1,6 +1,6 @@
 ---
 title: "Enfin des web-workers developer-friendly"
-date: 2023-04-25
+date: 2023-05-11
 summary: Démystifions Comlink en écrivant notre propre version
 keywords: javascript, web-worker, worker, async build-your-own
 ---

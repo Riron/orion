@@ -5,11 +5,11 @@ summary: Démystifions RxJS en écrivant notre propre version
 keywords: rxjs, javascript, reactive, build-your-own
 ---
 
-Quand on souhaite comprendre le fonctionnement d'une librairie, le meilleur moyen est souvent d'essayer de la réécrire soi-même. C'est ce que je vous propose de faire aujourd'hui avec RxJS.
+Quand on souhaite comprendre le fonctionnement d'une librairie, il est souvent pertinent d'essayer d'en réimplémenter une version simplifiée par soi-même. C'est ce que je vous propose de faire aujourd'hui avec RxJS.
 
 ## Définition
 
-On suppose ici que tout le monde connait déjà RxJS. Si ce n'est pas le cas, je vous invite à consulter [leur documentation officielle](). Cependant, prenons quand même le temps de rappeler certains principes pour voir comment ceux-ci se retrouvent ensuite dans le code.
+Mon objectif ici n'est pas de présenter ce que permet RxJS ni comment l'utiliser. Pour cela je vous invite à consulter [leur documentation officielle](https://rxjs.dev/). Cependant, prenons quand même le temps de rappeler certains principes pour voir comment ceux-ci se retrouvent ensuite dans le code.
 
 RxJS est une librairie de **programmation réactive** basée sur les **Observables**. Ces Observables représentent un flux de données que j'appelerai des **collections**. Ces collections peuvent représenter une suite d'événements, des requêtes HTTP, des streams, des tableaux, etc. L'avantage de les représenter ainsi, c'est que l'on peut les manipuler facilement, avec des opérateurs tels que `map`, `filter`, `reduce`...
 
